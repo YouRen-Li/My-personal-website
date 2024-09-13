@@ -1,0 +1,16 @@
+/* 定义并嵌入字体 */
+@font-face {
+  font-family: "XiaWuWenKai";
+  src: url("./ziti/XiaWuWenKai.ttf") format("truetype");
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* 应用字体 */
+body {
+  font-family: "XiaWuWenKai", sans-serif;
+}
