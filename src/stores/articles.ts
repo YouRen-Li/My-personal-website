@@ -21,8 +21,8 @@ export const useArticleStore = defineStore('articles', () => {
   const loading = ref(true)
   const error = ref('')
 
-  // 默认配置
-  const DEFAULT_COVER_IMAGE = '/src/assets/image/洛天依星空.png'
+  // 默认配置 - 导入图片资源以确保正确的路径处理
+  const DEFAULT_COVER_IMAGE = new URL('@/assets/image/洛天依星空.png', import.meta.url).href
 
   // 自动扫描并加载文章，同时检测变化
   const loadArticles = async () => {
@@ -40,7 +40,9 @@ export const useArticleStore = defineStore('articles', () => {
       }
       
       // 获取文档索引（添加时间戳防止缓存）
-      const indexResponse = await fetch(`/docs-index.json?t=${Date.now()}`)
+      // 考虑 base 路径配置
+      const basePath = import.meta.env.BASE_URL
+      const indexResponse = await fetch(`${basePath}docs-index.json?t=${Date.now()}`)
       if (!indexResponse.ok) {
         throw new Error('无法加载文档索引')
       }
@@ -48,7 +50,7 @@ export const useArticleStore = defineStore('articles', () => {
       const index = await indexResponse.json()
       const articlePromises = index.files.map(async (filename: string) => {
         try {
-          const mdFile = `/docs/${filename}`
+          const mdFile = `${basePath}docs/${filename}`
           
           // 获取markdown文件内容（添加时间戳防止缓存）
           const mdResponse = await fetch(`${mdFile}?t=${Date.now()}`)
