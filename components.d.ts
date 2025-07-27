@@ -18,7 +18,6 @@ declare module 'vue' {
     ElSubMenu: typeof import('element-plus/es')['ElSubMenu']
     ElText: typeof import('element-plus/es')['ElText']
     MarkdownRenderer: typeof import('./src/components/MarkdownRenderer.vue')['default']
-    QuickNav: typeof import('./src/components/QuickNav.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }

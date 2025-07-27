@@ -40,8 +40,10 @@ export const useArticleStore = defineStore('articles', () => {
       }
       
       // 获取文档索引（添加时间戳防止缓存）
-      // 考虑 base 路径配置
-      const basePath = import.meta.env.BASE_URL
+      // 考虑 base 路径配置，确保路径拼接正确
+      const basePath = import.meta.env.BASE_URL.endsWith('/') 
+        ? import.meta.env.BASE_URL 
+        : import.meta.env.BASE_URL + '/'
       const indexResponse = await fetch(`${basePath}docs-index.json?t=${Date.now()}`)
       if (!indexResponse.ok) {
         throw new Error('无法加载文档索引')
