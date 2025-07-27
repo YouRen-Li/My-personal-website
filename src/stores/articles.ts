@@ -21,8 +21,15 @@ export const useArticleStore = defineStore('articles', () => {
   const loading = ref(true)
   const error = ref('')
 
-  // 默认配置 - 导入图片资源以确保正确的路径处理
-  const DEFAULT_COVER_IMAGE = new URL('@/assets/image/洛天依星空.png', import.meta.url).href
+  // 导入图片资源以确保正确的路径处理
+  const imageAssets: Record<string, string> = {
+    '洛天依星空.png': new URL('@/assets/image/洛天依星空.png', import.meta.url).href,
+    '星空少女.png': new URL('@/assets/image/星空少女.png', import.meta.url).href,
+    'YouR.jpg': new URL('@/assets/image/YouR.jpg', import.meta.url).href,
+    'sun.svg': new URL('@/assets/image/sun.svg', import.meta.url).href
+  }
+  
+  const DEFAULT_COVER_IMAGE = imageAssets['洛天依星空.png']
 
   // 自动扫描并加载文章，同时检测变化
   const loadArticles = async () => {
@@ -70,12 +77,20 @@ export const useArticleStore = defineStore('articles', () => {
           // 获取默认日期
           const defaultDate = new Date().toISOString().split('T')[0]
           
+          // 处理封面图片路径
+          let coverImage = frontmatter.coverImage || DEFAULT_COVER_IMAGE
+          // 如果是assets路径，从映射表中获取正确的路径
+          if (coverImage.startsWith('/src/assets/image/')) {
+            const filename = coverImage.replace('/src/assets/image/', '')
+            coverImage = imageAssets[filename] || DEFAULT_COVER_IMAGE
+          }
+
           const article: Article = {
             id,
             filename: id,
             title: frontmatter.title || generateTitleFromFilename(id),
             description: frontmatter.description || extractDescription(content),
-            coverImage: frontmatter.coverImage || DEFAULT_COVER_IMAGE,
+            coverImage,
             date: frontmatter.date || defaultDate,
             readTime: frontmatter.readTime || calculateReadTime(content),
             tags: frontmatter.tags || [],
