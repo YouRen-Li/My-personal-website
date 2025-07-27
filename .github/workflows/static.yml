@@ -45,8 +45,11 @@ jobs:
       - name: Build project
         run: pnpm build
         
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+              - name: Setup Pages
+          uses: actions/configure-pages@v5
+          with:
+            # 自动启用Pages（如果还没有启用的话）
+            enablement: true
         
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
