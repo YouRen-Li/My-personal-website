@@ -10,6 +10,8 @@ import { articlesApiPlugin } from "./vite-plugins/api-articles.js";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // GitHub Pages部署配置
+  base: process.env.NODE_ENV === 'production' ? '/My-personal-website/' : '/',
   plugins: [
     vue(),
     // Element 按需导入
