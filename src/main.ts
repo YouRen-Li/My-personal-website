@@ -1,5 +1,6 @@
 import "./assets/main.css";
 import "element-plus/dist/index.css";
+import "highlight.js/styles/atom-one-dark.css"; // 添加代码高亮样式
 import { createApp } from "vue";
 import { createPinia } from "pinia";
 import "normalize.css";

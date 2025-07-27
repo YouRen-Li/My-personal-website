@@ -4,10 +4,28 @@
   src: url("./ziti/XiaWuWenKai.ttf") format("truetype");
 }
 
+/* 强制根元素背景透明 */
 html,
 body,
 #app {
-  height: 100%;
+  height: 100% !important;
+  background: transparent !important;
+  background-color: transparent !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+}
+
+/* 确保所有可能的容器元素背景透明 */
+* {
+  box-sizing: border-box;
+}
+
+.vue-app, 
+.app-container,
+.main-container {
+  background: transparent !important;
+  background-color: transparent !important;
 }
 
 /* 应用字体 */

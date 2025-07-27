@@ -8,12 +8,19 @@
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force"
+    "type-check": "vue-tsc --build --force",
+    "update-articles": "node scripts/update-articles.js"
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@types/js-yaml": "^4.0.9",
+    "@types/markdown-it": "^14.1.2",
     "axios": "^1.7.7",
+    "chokidar": "^4.0.3",
     "element-plus": "^2.8.2",
+    "highlight.js": "^11.11.1",
+    "js-yaml": "^4.1.0",
+    "markdown-it": "^14.1.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.1.7",
     "sass": "^1.78.0",
